@@ -33,15 +33,7 @@ def start(mess, res = False):
     btn1 = types.KeyboardButton('/Москва')
     markup.add(btn1)
     bot.send_message ( mess.chat.id, "Привет, гражданин! выбери свой город", reply_markup=markup)
-
-
-#@bot.message_handler(commands = ['Москва'])
-#def with_puree(message: types.Message):
-#  markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-#  btnCAO = types.KeyboardButton("/Центральный_Автономный_Округ")
-#  btnUAO = types.KeyboardButton("/Южный_Автономный_Округ")
-#  markup.add(btnCAO, btnUAO)
-#  bot.send_message( message.chat.id, "Выберите округ в котором находится мусор", reply_markup=markup)
+    
 
 districts = ['ЦАО', 'ЮАО', 'ВАО', 'CАО','СВАО','СЗАО','ЮВАО','ЮЗАО']
 
