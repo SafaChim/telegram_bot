@@ -10,20 +10,22 @@ Original file is located at
 !pip install deeppavlov
 !python -m deeppavlov install gobot_dstc2_minimal
 
+
 from deeppavlov.dataset_readers.dstc2_reader import SimpleDSTC2DatasetReader
 from deeppavlov.dataset_iterators.dialog_iterator import DialogDatasetIterator
 import telebot 
 from telebot import types # для указание типов 
-import requests
 import pathlib
+
 
 from google.colab import drive
 from google.colab import files
 from datetime import datetime, timedelta
 drive.mount('/content/drive')
-#uploaded = files.upload() команда для загрузки в диск
 
 bot = telebot.TeleBot('5161598285:AAEuEtTFz83zZJjYmhe8h56_ZoMl5jIG9LE')
+
+
 # Функция, обрабатывающая команду /start
 @bot.message_handler(commands = ['start'])
 def start(mess, res = False):
@@ -34,9 +36,10 @@ def start(mess, res = False):
     markup.add(btn1)
     bot.send_message ( mess.chat.id, "Привет, гражданин! выбери свой город", reply_markup=markup)
     
-
+    
 districts = ['ЦАО', 'ЮАО', 'ВАО', 'CАО','СВАО','СЗАО','ЮВАО','ЮЗАО']
 
+#выбор округа
 @bot.message_handler(commands = ['Москва'])
 def with_puree(message: types.Message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True )
@@ -44,7 +47,6 @@ def with_puree(message: types.Message):
         btn = types.KeyboardButton(''+i)
         markup.row(btn)
     bot.send_message( message.chat.id, "Выберите округ в котором находится мусор", reply_markup=markup)
-
 
 
 @bot.message_handler(content_types = 'text')
@@ -56,6 +58,7 @@ def special_message(message: types.Message):
     else :
         bot.send_message( message.chat.id, "Нажимайте на кнопки пожалуйста!")
 
+        
 #Получение фотографии
 @bot.message_handler(content_types = ['photo'])
 def handle_docs_document(message):
